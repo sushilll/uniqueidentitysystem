@@ -1,3 +1,5 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="UniqueIdentitySystem.DAO.CommonDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -12,6 +14,13 @@
 <body>
 <% 
 Connection con = CommonDAO.getObject().conFromPool();
-out.println(con); %>
+out.println(con);
+Statement st =  con.createStatement();
+ResultSet rs = st.executeQuery("select * from citizen;");
+while(rs.next()){
+	out.println(rs.absolute(1));
+}
+con.close();
+ %>
 </body>
 </html>

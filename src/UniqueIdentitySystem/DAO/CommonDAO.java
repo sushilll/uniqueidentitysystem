@@ -57,8 +57,6 @@ public class CommonDAO {
 			    String password = dbUri.getUserInfo().split(":")[1];
 //			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 			    
-			    System.out.println("path:::::"+dbUri.getPath());
-			    System.out.println("userinfo::::"+dbUri.getUserInfo());
 			    //pooling datasource config prop
 			    Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
 				dataSource.setServerName(dbUri.getHost());
@@ -73,6 +71,7 @@ public class CommonDAO {
 				
 				try {
 				    con = dataSource.getConnection();
+				    System.out.println("connection:::::::"+con);
 				    return con;
 				    // use connection
 				} catch(SQLException e) {
