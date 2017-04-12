@@ -1,7 +1,11 @@
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import org.postgresql.jdbc3.Jdbc3PoolingDataSource;
 
 // This class contains the DB Connection Only
 // and all the DAO is calling the CommonDAO to 
@@ -33,6 +37,7 @@ public class CommonDAO {
 		// To Read Property File
 		ResourceBundle rb = ResourceBundle.getBundle("db");
 		Class.forName(rb.getString("drivername"));
+		
 		Connection con= DriverManager.
 				getConnection(rb.getString("dburl")
 						,rb.getString("userid")
@@ -40,5 +45,45 @@ public class CommonDAO {
 		return con;
 	}
 	
-	
+	public Connection conFromPool() {
+		Connection con = null;
+		URI dbUri;
+		
+			try {
+				dbUri = new URI(System.getenv("DATABASE_URL"));
+				String username = dbUri.getUserInfo().split(":")[0];
+			    String password = dbUri.getUserInfo().split(":")[1];
+			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+			    
+			    //pooling datasource config prop
+			    Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
+				dataSource.setServerName(dbUri.getHost());
+				dataSource.setDatabaseName(dbUri.getPath());
+				dataSource.setPortNumber(dbUri.getPort());
+				dataSource.setUser(username);
+				dataSource.setPassword(password);
+				//additional
+//				dataSource.setDataSourceName("defined");
+				dataSource.setInitialConnections(1);
+				dataSource.setMaxConnections(15);
+				
+				try {
+				    con = dataSource.getConnection();
+				    // use connection
+				} catch(SQLException e) {
+				    // log error
+					e.printStackTrace();
+				} finally {
+				    if(con != null) {
+				        try {con.close();}catch(SQLException e) {}
+				    }
+				}
+				
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return con;
+	}
 }
