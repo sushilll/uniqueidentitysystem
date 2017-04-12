@@ -50,7 +50,7 @@ public class CommonDAO {
 	private static Jdbc3PoolingDataSource dataSource;
 	
 	public Connection getConnectionFromPool() throws URISyntaxException, SQLException {
-		synchronized (commonDAOObject) {
+		synchronized (CommonDAO.class) {
 			if (dataSource==null) {
 				URI dbUri;
 				dbUri = new URI(System.getenv("DATABASE_URL"));
