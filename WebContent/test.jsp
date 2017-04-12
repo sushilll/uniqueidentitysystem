@@ -1,3 +1,4 @@
+<%@page import="java.sql.ResultSetMetaData"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="UniqueIdentitySystem.DAO.CommonDAO"%>
@@ -17,9 +18,13 @@ Connection con = CommonDAO.getObject().conFromPool();
 out.println(con);
 Statement st =  con.createStatement();
 ResultSet rs = st.executeQuery("select * from citizen;");
+ResultSetMetaData metadata = rs.getMetaData();
+int n = metadata.getColumnCount();
 while(rs.next()){
 	int i=1;
+	if(i<n){
 	out.println(rs.getString(i++));
+	}
 }
 con.close();
  %>
