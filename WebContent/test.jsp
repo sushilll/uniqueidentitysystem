@@ -33,6 +33,7 @@
 			con.close();
 		} catch (SQLException e) {
 			// log error
+			out.println("1st exception");
 			e.printStackTrace();
 		} finally {
 			if (con != null) {
@@ -40,6 +41,7 @@
 					out.println("closing conn.:;';';';'';");
 					con.close();
 				} catch (SQLException e) {
+					out.println("problem in closing");
 				}
 			}
 		}
