@@ -47,9 +47,9 @@ public class CommonDAO {
 		return con;
 	}
 
-	private static Jdbc3PoolingDataSource dataSource;
 	
 	public Connection getConnectionFromPool() throws URISyntaxException, SQLException {
+		Jdbc3PoolingDataSource dataSource = null;
 			if (dataSource==null) {
 				URI dbUri;
 				dbUri = new URI(System.getenv("DATABASE_URL"));
@@ -58,7 +58,7 @@ public class CommonDAO {
 				//			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
 				//pooling datasource config prop
-				Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
+				dataSource = new Jdbc3PoolingDataSource();
 				dataSource.setServerName(dbUri.getHost());
 				dataSource.setDatabaseName(dbUri.getPath().substring(1));
 				dataSource.setPortNumber(dbUri.getPort());
