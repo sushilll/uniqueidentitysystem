@@ -23,71 +23,67 @@ public class CommonDAO {
 	private static CommonDAO commonDAOObject ;
 	// this is private constructor
 	private CommonDAO(){
-		
+
 	}
-	
+
 	public static  CommonDAO getObject(){
 		synchronized(CommonDAO.class){
-		if(commonDAOObject==null){
-			commonDAOObject = new CommonDAO();
-		}
+			if(commonDAOObject==null){
+				commonDAOObject = new CommonDAO();
+			}
 		}
 		return commonDAOObject;
 	}
-	
+
 	public Connection getConnection() throws ClassNotFoundException, SQLException{
 		// To Read Property File
 		ResourceBundle rb = ResourceBundle.getBundle("db");
 		Class.forName(rb.getString("drivername"));
-		
+
 		Connection con= DriverManager.
 				getConnection(rb.getString("dburl")
 						,rb.getString("userid")
 						,rb.getString("password"));
 		return con;
 	}
-	
+
 	public Connection conFromPool() {
 		Connection con = null;
 		URI dbUri;
-		
+
+		try {
+			dbUri = new URI(System.getenv("DATABASE_URL"));
+			String username = dbUri.getUserInfo().split(":")[0];
+			String password = dbUri.getUserInfo().split(":")[1];
+			//			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+			//pooling datasource config prop
+			Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
+			dataSource.setServerName(dbUri.getHost());
+			dataSource.setDatabaseName(dbUri.getPath().substring(1));
+			dataSource.setPortNumber(dbUri.getPort());
+			dataSource.setUser(username);
+			dataSource.setPassword(password);
+			//additional
+			//				dataSource.setDataSourceName("defined");
+			dataSource.setInitialConnections(1);
+			dataSource.setMaxConnections(15);
+
 			try {
-				dbUri = new URI(System.getenv("DATABASE_URL"));
-				String username = dbUri.getUserInfo().split(":")[0];
-			    String password = dbUri.getUserInfo().split(":")[1];
-//			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-			    
-			    //pooling datasource config prop
-			    Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
-				dataSource.setServerName(dbUri.getHost());
-				dataSource.setDatabaseName(dbUri.getPath().substring(1));
-				dataSource.setPortNumber(dbUri.getPort());
-				dataSource.setUser(username);
-				dataSource.setPassword(password);
-				//additional
-//				dataSource.setDataSourceName("defined");
-				dataSource.setInitialConnections(1);
-				dataSource.setMaxConnections(15);
-				
-				try {
-				    con = dataSource.getConnection();
-				    System.out.println("connection:::::::"+con);
-				    return con;
-				    // use connection
-				} catch(SQLException e) {
-				    // log error
-					e.printStackTrace();
-				} finally {
-				    if(con != null) {
-				        try {con.close();}catch(SQLException e) {}
-				    }
-				}
-				
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
+				con = dataSource.getConnection();
+				return con;
+				// use connection
+			}
+			catch(SQLException e) {
+				// log error
 				e.printStackTrace();
 			}
-			
-			return con;
+		}
+		catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return con;
 	}
 }
