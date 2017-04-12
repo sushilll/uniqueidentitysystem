@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" />
+
+<!-- Latest compiled and minified CSS -->
+ <!--<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+ <!--<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
+<!--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
+<link rel="stylesheet" href="css/custom.css" />
+
+
+</head>
+<body>
+	<!--Login Modal -->
+	<div id="loginModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Login</h4>
+				</div>
+				<div class="modal-body">
+					<form action="#" method="post" class="form-horizontal" >
+
+                            <ul class="nav nav-pills">
+                                <h4>I am</h4>
+                                <li class="active"><a data-toggle="pill" href="#" > Admin</a></li>
+                                <li><a data-toggle="pill" href="#"> AAI</a></li>
+                                <li><a data-toggle="pill" href="#"> Crime</a></li>
+                                <li><a data-toggle="pill" href="#"> RTA</a></li>
+                                <li><a data-toggle="pill" href="#"> Citizen</a></li>
+                                <li><a data-toggle="pill" href="#"> Staff</a></li>
+                            </ul>
+
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input class="form-control" type="text" id="username"
+									placeholder="Enter username here" required/>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input class="form-control" type="password" id="pwd"
+									placeholder="Enter password here" required />
+						</div>
+						<br>
+							<input type="submit" class="btn btn-default" value="Login"/>
+							<a href="#" style="margin-left: 5px;">Forgot Password</a>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--SIgn up Modal -->
+	<div id="SignupModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Sign up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="#" method="post" class="form-horizontal" onsubmit="return checkSignupForm(this);">
+						<div class="form-group">
+							<label class="control-label col-xs-4" for="regDate">Registration
+								Date</label>
+							<div class="col-xs-8">
+								<input type="date" class="form-control" id="regDate" disabled />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-4" for="name">Name</label>
+							<div class="col-xs-8">
+								<input class="form-control" type="text" id="name"
+									placeholder="Enter Full Name here" required/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-4" for="fathersname">Father's
+								Name</label>
+							<div class="col-xs-8">
+								<input class="form-control" type="text" id="fathersname"
+									placeholder="Enter Father's Name" required/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="dob" class="control-label col-xs-4"><i
+								class="fa fa-calendar"></i> Date Of Birth</label>
+							<div class="col-xs-8">
+								<input type="date" class="form-control" id="dob" required/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="mobileno" class="control-label col-xs-4"><i
+								class="fa fa-phone"></i> Mobile no.</label>
+							<div class="col-xs-8">
+								<input type="text" pattern="[0-9]{10}" id="mobileno" class="form-control" placeholder="10 digit mobile no."  required/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-4 loginlabel" for="pwd1"><i
+								class="fa fa-lock"></i> Password</label>
+							<div class="col-xs-8">
+								<input class="form-control" type="password" id="pwd1"
+									placeholder="Enter password here" name="pwd1" onchange="form.pwd2.pattern = this.value;" required/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-4 loginlabel" for="pwd2"><i
+								class="fa fa-lock"></i> Confirm Password</label>
+							<div class="col-xs-8">
+								<input title="Please enter the same Password as above" class="form-control" type="password" id="pwd2"
+									placeholder="Repeat password here" name="pwd2" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');" required/>
+							</div>
+						</div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">
+                                <i class="fa fa-question"></i> Secret Question
+                            </label>
+                            <div class="col-xs-8">
+                                <input class="form-control" type="text" name="secque" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">
+                                <i class="fa fa-archive"></i> Answer
+                            </label>
+                            <div class="col-xs-8">
+                                <input class="form-control" type="text" name="ans" required/>
+                            </div>
+                        </div>
+						<div class="col-xs-offset-4">
+							<input type="submit" class="btn btn-default" value="Sign up"
+								style="margin-left: 10px;" required/>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--navbar-->
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#collapsibleMenu">
+					<span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"> Unique Identity System</a>
+			</div>
+			<div id="collapsibleMenu" class="collapse navbar-collapse">
+				<div class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#" id="about" data-toggle="collapse"
+						data-target="#collapsibleMenu">About</a></li>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<!--trigger sign up modal-->
+						<button type="button" class="btn btn-default navbar-btn"
+							data-toggle="modal" data-target="#SignupModal"
+							style="margin-left: 8px">
+							<span class="glyphicon glyphicon-user"></span> Sign up
+						</button>
+                    </li>
+					<li>
+						<!-- Trigger Login modal button -->
+						<button type="button" class="btn btn-info navbar-btn"
+							data-toggle="modal" data-target="#loginModal"
+							style="margin-left: 8px">
+							<span class="glyphicon glyphicon-log-in"></span> Login
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div id="banner">
+		<h1>Unique Identity System</h1>
+		<p>For the convenience of the citizens</p>
+		<ul class="list-inline">
+			<li><a href="#" class="btn btn-default" data-toggle="modal"
+				data-target="#SignupModal"><h4>Sign up</h4></a></li>
+			<!--trigger login modal-->
+			<li><a href="#" class="btn btn-info" data-toggle="modal"
+				data-target="#loginModal"><h4>Login</h4></a></li>
+		</ul>
+	</div>
+
+	<div class="col-xs-offset-1 col-xs-10 middle">
+		<div>
+			<h4>The application deals with allowing the citizens to register
+				for a unique identity. The application intends to provide secure
+				travel facilities. The travel functionalities involve passport and
+				license.</h4>
+			<h4>The server maintains personal profile along with the photo
+				in a central server at the time of registration. This server then
+				provides data to concerned departments looking for citizen
+				information.</h4>
+			<br />
+			<h4>The aadhaar server maintains personal profile along with the
+				photo in a central server at the time of registration. This server
+				then provides data to concerned departments looking for citizen
+				information.</h4>
+		</div>
+	</div>
+
+
+	<div class="container-fluid col-xs-12 bottom">
+		<i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-google-plus"></i>
+        <i class="fa fa-youtube"></i>
+	</div>
+
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- jQuery library -->
+	 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+
+	<!-- Latest compiled JavaScript -->
+	 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+	<script src="js/custom.js"></script>
+</body>
+</html>
