@@ -1,3 +1,4 @@
+package UniqueIdentitySystem.DAO;
 
 public interface StatusConstants {
 public static final String SUCCESS="success";

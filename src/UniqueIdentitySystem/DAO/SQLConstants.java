@@ -1,3 +1,4 @@
+package UniqueIdentitySystem.DAO;
 
 public interface SQLConstants {
 String LOGIN_SQL = "select userid,password from citizen where userid=? and password=?";
