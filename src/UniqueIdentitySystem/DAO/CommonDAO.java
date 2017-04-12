@@ -60,7 +60,7 @@ public class CommonDAO {
 			    //pooling datasource config prop
 			    Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
 				dataSource.setServerName(dbUri.getHost());
-				dataSource.setDatabaseName(dbUri.getPath());
+				dataSource.setDatabaseName(dbUri.getRawPath());
 				dataSource.setPortNumber(dbUri.getPort());
 				dataSource.setUser(username);
 				dataSource.setPassword(password);
