@@ -18,7 +18,8 @@ out.println(con);
 Statement st =  con.createStatement();
 ResultSet rs = st.executeQuery("select * from citizen;");
 while(rs.next()){
-	out.println(rs.absolute(1));
+	int i=1;
+	out.println(rs.getString(i++));
 }
 con.close();
  %>
