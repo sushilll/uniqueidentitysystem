@@ -47,11 +47,10 @@ public class CommonDAO {
 		return con;
 	}
 
-	public Connection conFromPool() {
+	public Connection conFromPool() throws SQLException, URISyntaxException {
 		Connection con = null;
 		URI dbUri;
 
-		try {
 			dbUri = new URI(System.getenv("DATABASE_URL"));
 			String username = dbUri.getUserInfo().split(":")[0];
 			String password = dbUri.getUserInfo().split(":")[1];
@@ -69,21 +68,6 @@ public class CommonDAO {
 			dataSource.setInitialConnections(1);
 			dataSource.setMaxConnections(15);
 
-			try {
-				con = dataSource.getConnection();
-				return con;
-				// use connection
-			}
-			catch(SQLException e) {
-				// log error
-				e.printStackTrace();
-			}
-		}
-		catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return con;
+			return dataSource.getConnection();
 	}
 }
