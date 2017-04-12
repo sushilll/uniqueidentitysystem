@@ -47,27 +47,32 @@ public class CommonDAO {
 		return con;
 	}
 
-	public Connection conFromPool() throws SQLException, URISyntaxException {
-		Connection con = null;
-		URI dbUri;
+	private static Jdbc3PoolingDataSource dataSource;
+	
+	public Connection getConnectionFromPool() throws URISyntaxException, SQLException {
+		synchronized (commonDAOObject) {
+			if (dataSource==null) {
+				URI dbUri;
+				dbUri = new URI(System.getenv("DATABASE_URL"));
+				String username = dbUri.getUserInfo().split(":")[0];
+				String password = dbUri.getUserInfo().split(":")[1];
+				//			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-			dbUri = new URI(System.getenv("DATABASE_URL"));
-			String username = dbUri.getUserInfo().split(":")[0];
-			String password = dbUri.getUserInfo().split(":")[1];
-			//			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-
-			//pooling datasource config prop
-			Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
-			dataSource.setServerName(dbUri.getHost());
-			dataSource.setDatabaseName(dbUri.getPath().substring(1));
-			dataSource.setPortNumber(dbUri.getPort());
-			dataSource.setUser(username);
-			dataSource.setPassword(password);
-			//additional
-			//				dataSource.setDataSourceName("defined");
-			dataSource.setInitialConnections(15);
-			dataSource.setMaxConnections(15);
-
-			return dataSource.getConnection();
+				//pooling datasource config prop
+				Jdbc3PoolingDataSource dataSource = new Jdbc3PoolingDataSource();
+				dataSource.setServerName(dbUri.getHost());
+				dataSource.setDatabaseName(dbUri.getPath().substring(1));
+				dataSource.setPortNumber(dbUri.getPort());
+				dataSource.setUser(username);
+				dataSource.setPassword(password);
+				//additional
+				//				dataSource.setDataSourceName("defined");
+				dataSource.setInitialConnections(1);
+				dataSource.setMaxConnections(15);
+			}
+		}
+		return dataSource.getConnection();
 	}
+	
+	
 }

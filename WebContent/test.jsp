@@ -17,7 +17,7 @@
 	<%
 		Connection con = null;
 		try {
-			con = CommonDAO.getObject().conFromPool();
+			con = CommonDAO.getObject().getConnectionFromPool();
 			out.println(con);
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("select * from citizen;");
