@@ -65,7 +65,7 @@ public class CommonDAO {
 			dataSource.setPassword(password);
 			//additional
 			//				dataSource.setDataSourceName("defined");
-			dataSource.setInitialConnections(1);
+			dataSource.setInitialConnections(15);
 			dataSource.setMaxConnections(15);
 
 			return dataSource.getConnection();
