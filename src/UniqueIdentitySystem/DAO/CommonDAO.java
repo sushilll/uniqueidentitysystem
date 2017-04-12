@@ -47,9 +47,9 @@ public class CommonDAO {
 		return con;
 	}
 
-	
+	private static Jdbc3PoolingDataSource dataSource;
 	public Connection getConnectionFromPool() throws URISyntaxException, SQLException {
-		Jdbc3PoolingDataSource dataSource = null;
+		
 			if (dataSource==null) {
 				URI dbUri;
 				dbUri = new URI(System.getenv("DATABASE_URL"));
