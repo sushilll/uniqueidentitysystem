@@ -71,6 +71,7 @@ public class CommonDAO {
 				
 				try {
 				    con = dataSource.getConnection();
+				    return con;
 				    // use connection
 				} catch(SQLException e) {
 				    // log error
