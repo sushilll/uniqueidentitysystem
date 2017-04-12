@@ -29,11 +29,15 @@
 					out.println(rs.getString(i++));
 				}
 			}
+			st.close();
+			con.close();
 		} catch (SQLException e) {
 			// log error
+			e.printStackTrace();
 		} finally {
 			if (con != null) {
 				try {
+					out.println("closing conn.:;';';';'';");
 					con.close();
 				} catch (SQLException e) {
 				}
