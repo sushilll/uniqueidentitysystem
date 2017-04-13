@@ -1,24 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head lang="en">
-<meta charset="utf-8" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic" />
 
 <!-- Latest compiled and minified CSS -->
- <!--<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!--<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/font-awesome.min.css" />
- <!--<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
+<!--<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
 <!--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
 <link rel="stylesheet" href="css/custom.css" />
-
-
+<title>Insert title here</title>
 </head>
 <body>
-	<!--Login Modal -->
+<!--Login Modal -->
 	<div id="loginModal" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<!-- Modal content-->
@@ -72,18 +73,18 @@
 					<h4 class="modal-title">Sign up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="#" method="post" class="form-horizontal" onsubmit="return checkSignupForm(this);">
+					<s:form action="registration" method="post" class="form-horizontal" onsubmit="return checkSignupForm(this);">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="regDate">Registration
 								Date</label>
 							<div class="col-xs-8">
-								<input type="date" class="form-control" id="regDate" disabled />
+								<input name="regDate" type="date" class="form-control" id="regDate" disabled />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="name">Name</label>
 							<div class="col-xs-8">
-								<input class="form-control" type="text" id="name"
+								<input name="name" class="form-control" type="text" id="name"
 									placeholder="Enter Full Name here" required/>
 							</div>
 						</div>
@@ -91,7 +92,7 @@
 							<label class="control-label col-xs-4" for="fathersname">Father's
 								Name</label>
 							<div class="col-xs-8">
-								<input class="form-control" type="text" id="fathersname"
+								<input name="fname" class="form-control" type="text" id="fathersname"
 									placeholder="Enter Father's Name" required/>
 							</div>
 						</div>
@@ -99,7 +100,7 @@
 							<label for="dob" class="control-label col-xs-4"><i
 								class="fa fa-calendar"></i> Date Of Birth</label>
 							<div class="col-xs-8">
-								<input type="date" class="form-control" id="dob" required/>
+								<input name type="date" class="form-control" id="dob" required/>
 							</div>
 						</div>
 						<div class="form-group">
@@ -145,7 +146,7 @@
 							<input type="submit" class="btn btn-default" value="Sign up"
 								style="margin-left: 10px;" required/>
 						</div>
-					</form>
+					</s:form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -193,55 +194,16 @@
 			</div>
 		</div>
 	</nav>
-
-
-	<div id="banner">
-		<h1>Unique Identity System</h1>
-		<p>For the convenience of the citizens</p>
-		<ul class="list-inline">
-			<li><a href="#" class="btn btn-default" data-toggle="modal"
-				data-target="#SignupModal"><h4>Sign up</h4></a></li>
-			<!--trigger login modal-->
-			<li><a href="#" class="btn btn-info" data-toggle="modal"
-				data-target="#loginModal"><h4>Login</h4></a></li>
-		</ul>
-	</div>
-
-	<div class="col-xs-offset-1 col-xs-10 middle">
-		<div>
-			<h4>The application deals with allowing the citizens to register
-				for a unique identity. The application intends to provide secure
-				travel facilities. The travel functionalities involve passport and
-				license.</h4>
-			<h4>The server maintains personal profile along with the photo
-				in a central server at the time of registration. This server then
-				provides data to concerned departments looking for citizen
-				information.</h4>
-			<br />
-			<h4>The aadhaar server maintains personal profile along with the
-				photo in a central server at the time of registration. This server
-				then provides data to concerned departments looking for citizen
-				information.</h4>
-		</div>
-	</div>
-
-
-	<div class="container-fluid col-xs-12 bottom">
-		<i class="fa fa-facebook"></i>
-        <i class="fa fa-twitter"></i>
-        <i class="fa fa-google-plus"></i>
-        <i class="fa fa-youtube"></i>
-	</div>
-
+	
 
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 
 	<!-- jQuery library -->
-	 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 
 	<!-- Latest compiled JavaScript -->
-	 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
 	<script src="js/custom.js"></script>
 </body>
