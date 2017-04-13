@@ -31,5 +31,7 @@
 				information.</h4>
 		</div>
 	</div>
+</div>
 	
-	<<s:include value="bottom.jsp"></s:include>
+	
+	<s:include value="bottom.jsp"></s:include>
