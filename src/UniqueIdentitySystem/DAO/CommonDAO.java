@@ -11,7 +11,7 @@ import org.postgresql.jdbc3.Jdbc3PoolingDataSource;
 
 // This class contains the DB Connection Only
 // and all the DAO is calling the CommonDAO to 
-//reterive the connection
+//retrieve the connection
 
 
 // Singleton - it is a design pattern
@@ -48,7 +48,7 @@ public class CommonDAO {
 	}
 
 	private static Jdbc3PoolingDataSource dataSource;
-	public Connection getConnectionFromPool() throws URISyntaxException, SQLException {
+	public Connection getConnectionFromPoolHeroku() throws URISyntaxException, SQLException {
 		synchronized(CommonDAO.class){
 			if (dataSource==null) {
 				URI dbUri;
@@ -64,6 +64,31 @@ public class CommonDAO {
 				dataSource.setPortNumber(dbUri.getPort());
 				dataSource.setUser(username);
 				dataSource.setPassword(password);
+				//additional
+				//				dataSource.setDataSourceName("defined");
+				dataSource.setInitialConnections(1);
+				dataSource.setMaxConnections(15);
+			}
+		}
+		return dataSource.getConnection();
+	}
+	
+	public Connection getConnectionFromPoolLocalhost() throws SQLException {
+		synchronized(CommonDAO.class){
+			if (dataSource==null) {
+				/*URI dbUri;
+				dbUri = new URI(System.getenv("DATABASE_URL"));
+				String username = dbUri.getUserInfo().split(":")[0];
+				String password = dbUri.getUserInfo().split(":")[1];
+				//			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+*/
+				//pooling datasource config prop
+				dataSource = new Jdbc3PoolingDataSource();
+				dataSource.setServerName("ec2-50-19-89-124.compute-1.amazonaws.com");
+				dataSource.setDatabaseName("dce5bo2d7q2tn3");
+				dataSource.setPortNumber(5432);
+				dataSource.setUser("rchbmhslsaaqag");
+				dataSource.setPassword("5e6d14af07264aff9dee7753392f5d595a66d392746c5992c92ebb8f672a9fad");
 				//additional
 				//				dataSource.setDataSourceName("defined");
 				dataSource.setInitialConnections(1);
