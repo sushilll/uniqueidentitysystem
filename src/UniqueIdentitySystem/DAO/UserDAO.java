@@ -53,7 +53,7 @@ public class UserDAO {
 		if(con==null){
 			return StatusConstants.ERROR;
 		}
-		pstmt = con.prepareStatement(SQLConstants.LOGIN_SQL);
+		pstmt = con.prepareStatement(SQLConstants.CITIZEN_LOGIN);
 		pstmt.setString(1, userDTO.getUserid());
 		pstmt.setString(2, userDTO.getPassword());
 		rs = pstmt.executeQuery();

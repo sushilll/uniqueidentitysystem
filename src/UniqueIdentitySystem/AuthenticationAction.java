@@ -23,7 +23,7 @@ public class AuthenticationAction extends ActionSupport implements SessionAware 
         String loggedUserName = null;
         
         Connection con = CommonDAO.getObject().getConnectionFromPoolLocalhost();
-		PreparedStatement pst = con.prepareStatement(SQLConstants.LOGIN_SQL);
+		PreparedStatement pst = con.prepareStatement(SQLConstants.CITIZEN_LOGIN);
 		pst.setString(1, userName);
 		pst.setString(2, password);
 		ResultSet rs = pst.executeQuery();
