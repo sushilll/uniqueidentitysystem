@@ -6,6 +6,11 @@ $("#about").click(function() {
     $('html,body').animate({
         scrollTop: $(".middle").offset().top}, 'slow');
 });
+$("#banner").click(function() {
+    $('html,body').animate({
+        scrollTop: $(".middle").offset().top}, 'slow');
+});
+
 
 function checkSignupForm(form) {
     if(form.pwd1.value != form.pwd2.value){

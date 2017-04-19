@@ -3,18 +3,53 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<constant name="struts.devMode" value="true" />
-	<package name="default"  extends="struts-default">
-		<!-- refrences -->
+	<!--  --><constant name="struts.devMode" value="true"></constant>
+	<package name="default" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="UniqueIdentitySystem.Interceptor.LoginInterceptor" />
+
+			<!-- sb: you need to configure all of your interceptors here. i'm only 
+				listing the one we created for this example. -->
+			<!-- <interceptor-stack name="defaultStack"> <interceptor-ref name="login" 
+				/> </interceptor-stack> -->
+		</interceptors>
+
+		<!-- <default-interceptor-ref name="loginInterceptor"></default-interceptor-ref> -->
+		
+		<global-results>
+			<!-- sb: make this the path to your login action. this could also be a 
+				redirectAction type. -->
+			<result name="loginRedirect" type="redirect">/login.jsp</result>
+		</global-results>
+
 		<!-- <action name="welcome" class="com.srivastava.basics.HelloAction"> 
-			<result name="success">/index.jsp</result> </action>
-			<action name="loginCheck" class="com.srivastava.basics.HelloAction" method="checkLogin" >
-			<result name="login">/welcome.jsp</result> 
+			<result name="success">/index.jsp</result> </action> <action name="loginCheck" 
+			class="com.srivastava.basics.HelloAction" method="checkLogin" > <result name="login">/welcome.jsp</result> 
 			<result name="error"></result> </action> -->
-		<action name="registration" class="UniqueIdentitySystem.DAO.RegisterDAO">
+		<action name="registration" class="UniqueIdentitySystem.RegisterAction">
 			<result name="success">/welcome.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
+
+		<action name="login" class="UniqueIdentitySystem.LoginAction">
+			<result name="input">login.jsp</result>
+			<result name="success">citizen.jsp</result>
+			<result name="error">login-error.jsp</result>
+		</action>
+
+		<!-- -->
+		<action name="register" class="UniqueIdentitySystem.RegisterAction">
+		
+			<result name="success">register-success.jsp</result>
+			<result name="error">register-error.jsp</result>
+		</action>
+
+		<!-- <action name="login" class="UniqueIdentitySystem.AuthenticationAction" 
+			method="login"> <result name="success">welcome.jsp</result> <result name="input">test.jsp</result> 
+			</action> <action name="logout" class="UniqueIdentitySystem.AuthenticationAction" 
+			method="logout"> <result name="success">test.jsp</result> </action> -->
 
 	</package>
 </struts>

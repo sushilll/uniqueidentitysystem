@@ -94,8 +94,8 @@ public class CommonDAO {
 				dataSource.setUrl("jdbc:postgresql://ec2-50-19-89-124.compute-1.amazonaws.com:5432/dce5bo2d7q2tn3?sslmode=require&user=rchbmhslsaaqag&password=5e6d14af07264aff9dee7753392f5d595a66d392746c5992c92ebb8f672a9fad");
 				//additional
 				//				dataSource.setDataSourceName("defined");
-				dataSource.setInitialConnections(1);
-				dataSource.setMaxConnections(15);
+//				dataSource.setInitialConnections(1);
+				dataSource.setMaxConnections(1);
 //				dataSource.setSsl(true);
 //				dataSource.setSslPassword("5e6d14af07264aff9dee7753392f5d595a66d392746c5992c92ebb8f672a9fad");
 			}

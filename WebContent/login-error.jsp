@@ -1,6 +1,10 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <s:include value="navbar.jsp"></s:include>
 
+<div class="error">
+<h3 >Invalid userid or password</h3>
+</div>
+
 <div id="banner">
 	<h1>Unique Identity System</h1>
 	<p>For the convenience of the citizens</p>
